@@ -135,17 +135,17 @@ const SharedContractView = () => {
       {/* Header */}
       <div className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 sm:py-6 space-y-4 sm:space-y-0">
             <div className="flex items-center">
-              <button onClick={() => navigate('/')} className="mr-4 p-2 rounded-md hover:bg-gray-100">
+              <button onClick={() => navigate('/')} className="mr-3 sm:mr-4 p-2 rounded-md hover:bg-gray-100">
                 <ArrowLeft className="h-5 w-5" />
               </button>
-              <div className="min-w-0">
-                <h1 className="text-2xl font-bold text-gray-900 truncate">{contract.title}</h1>
-                <p className="text-sm text-gray-500 truncate">{contract.contract_type}</p>
+              <div className="min-w-0 flex-1">
+                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 truncate">{contract.title}</h1>
+                <p className="text-xs sm:text-sm text-gray-500 truncate">{contract.contract_type}</p>
               </div>
             </div>
-            <button onClick={() => setShowFeedback(true)} className="btn-primary flex items-center">
+            <button onClick={() => setShowFeedback(true)} className="btn-primary flex items-center justify-center w-full sm:w-auto">
               <MessageSquare className="h-4 w-4 mr-2" />
               Request Feedback
             </button>
@@ -153,18 +153,18 @@ const SharedContractView = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Overview Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {/* Risk Score */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold text-gray-900">Risk Score</h3>
-              <Target className="h-5 w-5 text-blue-600" />
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900">Risk Score</h3>
+              <Target className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
             </div>
             <div className="text-center">
               <div className="relative inline-block">
-                <svg className="w-28 h-28 transform -rotate-90" viewBox="0 0 100 100">
+                <svg className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 transform -rotate-90" viewBox="0 0 100 100">
                   <circle cx="50" cy="50" r="42" stroke="currentColor" strokeWidth="6" fill="transparent" className="text-gray-200" />
                   <circle
                     cx="50"
@@ -182,16 +182,16 @@ const SharedContractView = () => {
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-2xl font-bold" style={{ color: getRiskColor(contract.risk_score || 0) }}>
+                    <div className="text-lg sm:text-xl lg:text-2xl font-bold" style={{ color: getRiskColor(contract.risk_score || 0) }}>
                       {contract.risk_score || 0}
                     </div>
-                    <div className="text-sm text-gray-500">/100</div>
+                    <div className="text-xs sm:text-sm text-gray-500">/100</div>
                   </div>
                 </div>
               </div>
               <div className="mt-2">
                 <span
-                  className="px-2 py-1 rounded-full text-sm font-medium"
+                  className="px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
                   style={{ backgroundColor: getRiskColor(contract.risk_score || 0) + '20', color: getRiskColor(contract.risk_score || 0) }}
                 >
                   {getRiskLevel(contract.risk_score || 0)}
@@ -201,107 +201,107 @@ const SharedContractView = () => {
           </div>
 
           {/* Risk Factors Count */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold text-gray-900">Risk Factors</h3>
-              <Shield className="h-5 w-5 text-red-600" />
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900">Risk Factors</h3>
+              <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-red-600" />
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-red-600">{contract.risk_factors?.length || 0}</div>
-              <div className="text-sm text-gray-500 mt-1">Identified</div>
+              <div className="text-2xl sm:text-3xl font-bold text-red-600">{contract.risk_factors?.length || 0}</div>
+              <div className="text-xs sm:text-sm text-gray-500 mt-1">Identified</div>
             </div>
           </div>
 
           {/* Analysis Time */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold text-gray-900">Analysis Time</h3>
-              <Zap className="h-5 w-5 text-purple-600" />
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900">Analysis Time</h3>
+              <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600">
+              <div className="text-lg sm:text-2xl lg:text-3xl font-bold text-purple-600">
                 {analysis?.processing_time_seconds ? `${analysis.processing_time_seconds.toFixed(1)}s` : 'N/A'}
               </div>
-              <div className="text-sm text-gray-500 mt-1">Processing</div>
+              <div className="text-xs sm:text-sm text-gray-500 mt-1">Processing</div>
             </div>
           </div>
 
           {/* AI Model */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold text-gray-900">AI Model</h3>
-              <Brain className="h-5 w-5 text-green-600" />
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900">AI Model</h3>
+              <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
             </div>
             <div className="text-center">
-              <div className="text-lg font-bold text-green-600">{analysis?.ai_model_used || 'Mock'}</div>
-              <div className="text-sm text-gray-500 mt-1">Analysis</div>
+              <div className="text-sm sm:text-lg font-bold text-green-600">{analysis?.ai_model_used || 'Mock'}</div>
+              <div className="text-xs sm:text-sm text-gray-500 mt-1">Analysis</div>
             </div>
           </div>
         </div>
 
         {/* Analysis Timeline */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-            <Calendar className="h-5 w-5 mr-2 text-blue-600" />
+        <div className="bg-white rounded-lg shadow p-4 sm:p-6 mb-6 sm:mb-8">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center">
+            <Calendar className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-blue-600" />
             Analysis Timeline
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-              <span className="text-sm text-gray-600">Started</span>
-              <span className="text-sm font-semibold">
+              <span className="text-xs sm:text-sm text-gray-600">Started</span>
+              <span className="text-xs sm:text-sm font-semibold">
                 {analysis?.started_at ? new Date(analysis.started_at).toLocaleDateString() : 'N/A'}
               </span>
             </div>
             <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-              <span className="text-sm text-gray-600">Completed</span>
-              <span className="text-sm font-semibold">
+              <span className="text-xs sm:text-sm text-gray-600">Completed</span>
+              <span className="text-xs sm:text-sm font-semibold">
                 {analysis?.completed_at ? new Date(analysis.completed_at).toLocaleDateString() : 'N/A'}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Contract Details and Risk Factors */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">Contract Details</h2>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(contract.status)}`}>
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
+            <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-2 sm:space-y-0">
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Contract Details</h2>
+                <span className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${getStatusColor(contract.status)}`}>
                   {getStatusIcon(contract.status)}
                   <span className="ml-1 capitalize">{contract.status}</span>
                 </span>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Type</label>
-                  <p className="mt-1 text-sm text-gray-900">{contract.contract_type}</p>
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700">Type</label>
+                  <p className="mt-1 text-xs sm:text-sm text-gray-900">{contract.contract_type}</p>
                 </div>
                 {contract.description && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Description</label>
-                    <p className="mt-1 text-sm text-gray-900">{contract.description}</p>
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700">Description</label>
+                    <p className="mt-1 text-xs sm:text-sm text-gray-900">{contract.description}</p>
                   </div>
                 )}
                 {contract.recommendations && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Recommendations</label>
-                    <p className="mt-1 text-sm text-gray-900">{contract.recommendations}</p>
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700">Recommendations</label>
+                    <p className="mt-1 text-xs sm:text-sm text-gray-900">{contract.recommendations}</p>
                   </div>
                 )}
               </div>
             </div>
 
             {contract.risk_factors && contract.risk_factors.length > 0 && (
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Risk Factors</h3>
+              <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Risk Factors</h3>
                 <div className="space-y-3">
                   {contract.risk_factors.map((factor, index) => (
                     <div key={index} className="flex items-start">
-                      <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 mr-3 flex-shrink-0" />
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">{factor.factor || factor.title || `Risk Factor ${index + 1}`}</p>
-                        <p className="text-sm text-gray-600">{factor.description || 'No description available'}</p>
+                      <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-red-500 mt-0.5 mr-2 sm:mr-3 flex-shrink-0" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs sm:text-sm font-medium text-gray-900">{factor.factor || factor.title || `Risk Factor ${index + 1}`}</p>
+                        <p className="text-xs sm:text-sm text-gray-600">{factor.description || 'No description available'}</p>
                       </div>
                     </div>
                   ))}
@@ -312,25 +312,25 @@ const SharedContractView = () => {
 
           {/* Comments Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Feedback</h3>
+            <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Feedback</h3>
               {comments.length === 0 ? (
-                <p className="text-gray-500 text-sm">No feedback yet. Be the first to comment!</p>
+                <p className="text-gray-500 text-xs sm:text-sm">No feedback yet. Be the first to comment!</p>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {comments.map((comment) => (
-                    <div key={comment.id} className="border-b border-gray-200 pb-4 last:border-b-0">
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-medium text-gray-900">{comment.commenter_name}</h4>
+                    <div key={comment.id} className="border-b border-gray-200 pb-3 sm:pb-4 last:border-b-0">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 space-y-1 sm:space-y-0">
+                        <h4 className="font-medium text-gray-900 text-sm">{comment.commenter_name}</h4>
                         {comment.rating && (
                           <div className="flex items-center">
                             {[...Array(5)].map((_, i) => (
-                              <Star key={i} className={`h-4 w-4 ${i < comment.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} />
+                              <Star key={i} className={`h-3 w-3 sm:h-4 sm:w-4 ${i < comment.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} />
                             ))}
                           </div>
                         )}
                       </div>
-                      <p className="text-sm text-gray-600">{comment.comment_text}</p>
+                      <p className="text-xs sm:text-sm text-gray-600">{comment.comment_text}</p>
                       <p className="text-xs text-gray-400 mt-2">{new Date(comment.created_at).toLocaleDateString()}</p>
                     </div>
                   ))}
@@ -346,7 +346,7 @@ const SharedContractView = () => {
         <div className="fixed inset-0 z-50 overflow-y-auto">
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full mx-4 sm:mx-0">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
@@ -354,25 +354,25 @@ const SharedContractView = () => {
                     <form onSubmit={handleFeedbackSubmit} className="mt-4 space-y-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700">Your Name *</label>
-                        <input type="text" required value={feedbackForm.commenter_name} onChange={(e) => setFeedbackForm(prev => ({ ...prev, commenter_name: e.target.value }))} className="input-field mt-1" />
+                        <input type="text" required value={feedbackForm.commenter_name} onChange={(e) => setFeedbackForm(prev => ({ ...prev, commenter_name: e.target.value }))} className="input-field mt-1 w-full" />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700">Email (Optional)</label>
-                        <input type="email" value={feedbackForm.commenter_email} onChange={(e) => setFeedbackForm(prev => ({ ...prev, commenter_email: e.target.value }))} className="input-field mt-1" />
+                        <input type="email" value={feedbackForm.commenter_email} onChange={(e) => setFeedbackForm(prev => ({ ...prev, commenter_email: e.target.value }))} className="input-field mt-1 w-full" />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700">Rating</label>
                         <div className="flex items-center mt-1">
                           {[1, 2, 3, 4, 5].map((rating) => (
                             <button key={rating} type="button" onClick={() => setFeedbackForm(prev => ({ ...prev, rating }))} className="p-1">
-                              <Star className={`h-6 w-6 ${rating <= feedbackForm.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} />
+                              <Star className={`h-5 w-5 sm:h-6 sm:w-6 ${rating <= feedbackForm.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} />
                             </button>
                           ))}
                         </div>
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700">Feedback *</label>
-                        <textarea required rows={4} value={feedbackForm.comment_text} onChange={(e) => setFeedbackForm(prev => ({ ...prev, comment_text: e.target.value }))} className="input-field mt-1" placeholder="Share your thoughts about this contract..." />
+                        <textarea required rows={4} value={feedbackForm.comment_text} onChange={(e) => setFeedbackForm(prev => ({ ...prev, comment_text: e.target.value }))} className="input-field mt-1 w-full" placeholder="Share your thoughts about this contract..." />
                       </div>
                     </form>
                   </div>
