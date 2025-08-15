@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Copy, Check, X, Share2 } from 'lucide-react';
 import { sharingAPI } from '../services/api';
+import { useToast } from '../contexts/ToastContext';
 
 const ShareContractModal = ({ isOpen, onClose, contractId, contractTitle }) => {
   const [shareUrl, setShareUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const { toast } = useToast();
 
   const generateShareLink = async () => {
     setIsLoading(true);
     try {
       const result = await sharingAPI.generateShareLink(contractId);
       setShareUrl(result.share_url);
+      toast.success('Share link generated successfully!');
     } catch (error) {
-      console.error('Failed to generate share link:', error);
-      alert('Failed to generate share link. Please try again.');
+      toast.error('Failed to generate share link. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -25,9 +27,9 @@ const ShareContractModal = ({ isOpen, onClose, contractId, contractTitle }) => {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      toast.success('Link copied to clipboard!');
     } catch (error) {
-      console.error('Failed to copy to clipboard:', error);
-      alert('Failed to copy link. Please copy manually.');
+      toast.error('Failed to copy link. Please copy manually.');
     }
   };
 

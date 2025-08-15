@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '../contexts/AuthContext';
+import { useToast } from '../contexts/ToastContext';
 import { Link } from 'react-router-dom';
 import { 
   Plus, 
@@ -12,7 +14,8 @@ import {
   Share2,
   FileText,
   Calendar,
-  MessageSquare
+  MessageSquare,
+  X
 } from 'lucide-react';
 import { contractsAPI, commentsAPI } from '../services/api';
 import ShareContractModal from '../components/ShareContractModal';
@@ -32,6 +35,7 @@ const Dashboard = () => {
   const [selectedContractForShare, setSelectedContractForShare] = useState(null);
   
   const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   // Fetch contracts
   const { data: contracts = [], isLoading, error } = useQuery({
@@ -53,10 +57,11 @@ const Dashboard = () => {
       setShowUploadModal(false);
       setUploadForm({ title: '', description: '', contract_type: '', custom_type: '' });
       setSelectedFile(null);
+      toast.success('Contract uploaded successfully!');
     },
     onError: (error) => {
       console.error('Upload failed:', error);
-      alert('Upload failed. Please try again.');
+      toast.error('Upload failed. Please try again.');
     },
   });
 
@@ -66,10 +71,11 @@ const Dashboard = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(['contracts']);
       setDeleteConfirm(null);
+      toast.success('Contract deleted successfully!');
     },
     onError: (error) => {
       console.error('Delete failed:', error);
-      alert('Delete failed. Please try again.');
+      toast.error('Delete failed. Please try again.');
     },
   });
 
@@ -89,12 +95,9 @@ const Dashboard = () => {
 
     setIsUploading(true);
     try {
-      console.log('Upload form data:', uploadForm);
-      console.log('Selected file:', selectedFile);
-      
       // Validate custom type when selected
       if (uploadForm.contract_type === 'custom' && (!uploadForm.custom_type || !uploadForm.custom_type.trim())) {
-        alert('Please enter a custom contract type.');
+        toast.warning('Please enter a custom contract type.');
         setIsUploading(false);
         return;
       }

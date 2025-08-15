@@ -14,10 +14,12 @@ import {
   Calendar
 } from 'lucide-react';
 import { sharingAPI } from '../services/api';
+import { useToast } from '../contexts/ToastContext';
 
 const SharedContractView = () => {
   const { token } = useParams();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [contract, setContract] = useState(null);
   const [analysis, setAnalysis] = useState(null);
   const [comments, setComments] = useState([]);
@@ -96,8 +98,9 @@ const SharedContractView = () => {
       setShowFeedback(false);
       const refreshed = await sharingAPI.getSharedComments(token);
       setComments(refreshed);
+      toast.success('Feedback submitted successfully!');
     } catch (err) {
-      alert('Failed to submit feedback. Please try again.');
+      toast.error('Failed to submit feedback. Please try again.');
     } finally {
       setSubmitting(false);
     }
