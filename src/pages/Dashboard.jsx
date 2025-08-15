@@ -178,22 +178,22 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
       <div className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 sm:py-6 space-y-4 sm:space-y-0">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Contract Dashboard</h1>
-              <p className="text-sm text-gray-600">Manage and analyze your contracts</p>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Contract Dashboard</h1>
+              <p className="text-xs sm:text-sm text-gray-600">Manage and analyze your contracts</p>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
               {/* Feedback Notification */}
               {commentsData && commentsData.total_comments > 0 && (
                 <div className="relative">
-                  <div className="flex items-center p-2 bg-blue-50 rounded-lg">
-                    <MessageSquare className="h-5 w-5 text-blue-600" />
-                    <span className="ml-2 text-sm font-medium text-blue-900">
+                  <div className="flex items-center justify-center p-2 bg-blue-50 rounded-lg">
+                    <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
+                    <span className="ml-2 text-xs sm:text-sm font-medium text-blue-900">
                       {commentsData.total_comments} feedback
                     </span>
                     <span className="ml-1 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -205,7 +205,7 @@ const Dashboard = () => {
               
               <button
                 onClick={() => setShowUploadModal(true)}
-                className="btn-primary flex items-center"
+                className="btn-primary flex items-center justify-center w-full sm:w-auto"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Upload Contract
@@ -216,55 +216,55 @@ const Dashboard = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="card p-4 sm:p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="card p-3 sm:p-4 lg:p-6">
           <div className="flex items-center">
             <div className="p-2 bg-blue-100 rounded-lg">
-              <FileText className="h-5 w-6 text-blue-600" />
+              <FileText className="h-4 w-4 sm:h-5 sm:w-6 text-blue-600" />
             </div>
-            <div className="ml-3 sm:ml-4">
+            <div className="ml-2 sm:ml-3 lg:ml-4">
               <p className="text-xs sm:text-sm font-medium text-gray-600">Total Contracts</p>
-              <p className="text-xl sm:text-2xl font-bold text-gray-900">{contracts.length}</p>
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">{contracts.length}</p>
             </div>
           </div>
         </div>
         
-        <div className="card p-4 sm:p-6">
+        <div className="card p-3 sm:p-4 lg:p-6">
           <div className="flex items-center">
             <div className="p-2 bg-green-100 rounded-lg">
-              <CheckCircle className="h-5 w-6 text-green-600" />
+              <CheckCircle className="h-4 w-4 sm:h-5 sm:w-6 text-green-600" />
             </div>
-            <div className="ml-3 sm:ml-4">
+            <div className="ml-2 sm:ml-3 lg:ml-4">
               <p className="text-xs sm:text-sm font-medium text-gray-600">Completed</p>
-              <p className="text-xl sm:text-2xl font-bold text-gray-900">
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">
                 {contracts.filter(c => c.status === 'completed').length}
               </p>
             </div>
           </div>
         </div>
         
-        <div className="card p-4 sm:p-6">
+        <div className="card p-3 sm:p-4 lg:p-6">
           <div className="flex items-center">
             <div className="p-2 bg-yellow-100 rounded-lg">
-              <Clock className="h-5 w-6 text-yellow-600" />
+              <Clock className="h-4 w-4 sm:h-5 sm:w-6 text-yellow-600" />
             </div>
-            <div className="ml-3 sm:ml-4">
+            <div className="ml-2 sm:ml-3 lg:ml-4">
               <p className="text-xs sm:text-sm font-medium text-gray-600">Processing</p>
-              <p className="text-xl sm:text-2xl font-bold text-gray-900">
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">
                 {contracts.filter(c => c.status === 'processing').length}
               </p>
             </div>
           </div>
         </div>
         
-        <div className="card p-4 sm:p-6">
+        <div className="card p-3 sm:p-4 lg:p-6">
           <div className="flex items-center">
             <div className="p-2 bg-red-100 rounded-lg">
-              <AlertTriangle className="h-5 w-6 text-red-600" />
+              <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-6 text-red-600" />
             </div>
-            <div className="ml-3 sm:ml-4">
+            <div className="ml-2 sm:ml-3 lg:ml-4">
               <p className="text-xs sm:text-sm font-medium text-gray-600">Failed</p>
-              <p className="text-xl sm:text-2xl font-bold text-gray-900">
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">
                 {contracts.filter(c => c.status === 'failed').length}
               </p>
             </div>
@@ -274,51 +274,51 @@ const Dashboard = () => {
 
       {/* Contracts Table */}
       <div className="card">
-        <div className="px-4 py-6 sm:px-6 lg:px-8">
+        <div className="px-3 py-4 sm:px-4 sm:py-6 lg:px-6 lg:py-8">
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">Contracts</h3>
-              <p className="mt-2 text-sm text-gray-700">
+              <h3 className="text-base sm:text-lg font-medium leading-6 text-gray-900">Contracts</h3>
+              <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-700">
                 A list of all your uploaded contracts and their analysis status.
               </p>
             </div>
           </div>
           
-          <div className="mt-8 flow-root">
-            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div className="mt-6 sm:mt-8 flow-root">
+            <div className="-mx-3 -my-2 overflow-x-auto sm:-mx-4 sm:-mx-6 lg:-mx-8">
+              <div className="inline-block min-w-full py-2 align-middle sm:px-4 sm:px-6 lg:px-8">
                 {/* Mobile view - Cards */}
-                <div className="lg:hidden space-y-4">
+                <div className="lg:hidden space-y-3 sm:space-y-4">
                   {contracts.map((contract) => (
-                    <div key={contract.id} className="bg-white border border-gray-200 rounded-lg p-4">
+                    <div key={contract.id} className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4">
                       <div className="flex items-start justify-between">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center">
-                            <div className="h-10 w-10 flex-shrink-0">
-                              <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">
-                                <FileText className="h-5 w-5 text-gray-600" />
+                            <div className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0">
+                              <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-gray-100 flex items-center justify-center">
+                                <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
                               </div>
                             </div>
-                            <div className="ml-3 min-w-0 flex-1">
-                              <div className="font-medium text-gray-900 truncate">{contract.title}</div>
-                              <div className="text-sm text-gray-500 truncate">{contract.file_name}</div>
+                            <div className="ml-2 sm:ml-3 min-w-0 flex-1">
+                              <div className="font-medium text-gray-900 truncate text-sm sm:text-base">{contract.title}</div>
+                              <div className="text-xs sm:text-sm text-gray-500 truncate">{contract.file_name}</div>
                               <div className="text-xs text-gray-400 mt-1">{contract.contract_type || 'General'}</div>
                             </div>
                           </div>
                         </div>
-                        <div className="ml-4 flex flex-col items-end space-y-2">
-                          <div className="flex items-center space-x-2">
+                        <div className="ml-2 sm:ml-4 flex flex-col items-end space-y-2">
+                          <div className="flex items-center space-x-1 sm:space-x-2">
                             {getStatusIcon(contract.status)}
-                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(contract.status)}`}>
+                            <span className={`inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(contract.status)}`}>
                               {contract.status}
                             </span>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-1 sm:space-x-2">
                             <Link
                               to={`/contracts/${contract.id}`}
                               className="text-primary-600 hover:text-primary-900 p-1"
                             >
-                              <Eye className="h-4 w-4" />
+                              <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Link>
                             <button
                               onClick={() => {
@@ -327,13 +327,13 @@ const Dashboard = () => {
                               }}
                               className="text-green-600 hover:text-green-900 p-1"
                             >
-                              <Share2 className="h-4 w-4" />
+                              <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
                             </button>
                             <button
                               onClick={() => handleDelete(contract)}
                               className="text-red-600 hover:text-red-900 p-1"
                             >
-                              <Trash2 className="h-4 w-4" />
+                              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                             </button>
                           </div>
                         </div>
@@ -427,18 +427,18 @@ const Dashboard = () => {
                 </table>
                 
                 {contracts.length === 0 && (
-                  <div className="text-center py-12">
-                    <FileText className="mx-auto h-12 w-12 text-gray-400" />
+                  <div className="text-center py-8 sm:py-12">
+                    <FileText className="mx-auto h-8 w-8 sm:h-12 sm:w-12 text-gray-400" />
                     <h3 className="mt-2 text-sm font-medium text-gray-900">No contracts</h3>
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-xs sm:text-sm text-gray-500">
                       Get started by uploading your first contract.
                     </p>
-                    <div className="mt-6">
+                    <div className="mt-4 sm:mt-6">
                       <button
                         onClick={() => setShowUploadModal(true)}
                         className="btn-primary"
                       >
-                        <Plus className="h-5 w-5 mr-2" />
+                        <Plus className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                         Upload Contract
                       </button>
                     </div>
