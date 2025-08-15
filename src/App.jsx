@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ToastProvider } from './contexts/ToastContext';
+import ErrorBoundary from './components/ErrorBoundary';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -14,7 +15,17 @@ import ResetPassword from './pages/ResetPassword';
 import ChangePassword from './pages/ChangePassword';
 import Layout from './components/Layout';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+    mutations: {
+      retry: false,
+    },
+  },
+});
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -80,9 +91,11 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ToastProvider>
-          <Router>
-            <AppRoutes />
-          </Router>
+          <ErrorBoundary>
+            <Router>
+              <AppRoutes />
+            </Router>
+          </ErrorBoundary>
         </ToastProvider>
       </AuthProvider>
     </QueryClientProvider>

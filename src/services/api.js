@@ -5,6 +5,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v1';
 // Create axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
+  timeout: 12000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -34,7 +35,9 @@ api.interceptors.response.use(
       localStorage.removeItem('authToken');
       window.location.href = '/login';
     }
-    return Promise.reject(error);
+    // Normalize error message
+    const message = error.response?.data?.detail || error.message || 'Network error';
+    return Promise.reject(new Error(message));
   }
 );
 
